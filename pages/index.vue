@@ -1,27 +1,24 @@
 <template>
     <div>
-        <h2 class="text-2xl font-semibold mb-4">
-            Registriere Deine Kleiderspende
-        </h2>
-        <form
-            @submit.prevent="handleSubmit"
-            class="bg-white p-6 rounded shadow-md"
-        >
+        <h2 class="text-2xl font-semibold mb-4">Registriere deine Kleiderspende</h2>
+        <form @submit.prevent="submitDonation" class="block p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <div class="mb-4">
                 <label>Wie möchtest Du die Spende übergeben?</label>
                 <div>
                     <label class="inline-flex items-center">
                         <input
                             type="radio"
+                            class="mr-1.5 w-4 h-4 border-gray-300 focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 dark:focus:bg-indigo-600 dark:bg-gray-700 dark:border-gray-600"
                             v-model="form.deliveryOption"
                             value="office"
-                            required
+                            checked
                         />
                         Geschäftsstelle
                     </label>
                     <label class="inline-flex items-center ml-4">
                         <input
                             type="radio"
+                            class="mr-1.5 w-4 h-4 border-gray-300 focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 dark:focus:bg-indigo-600 dark:bg-gray-700 dark:border-gray-600"
                             v-model="form.deliveryOption"
                             value="pickup"
                         />
@@ -30,58 +27,71 @@
                 </div>
             </div>
             <div v-if="form.deliveryOption === 'pickup'" class="mb-4">
-                <label>Abholadresse:</label>
-                <input
-                    type="text"
-                    v-model="form.pickupAddress"
-                    class="w-full p-2 border rounded"
-                />
-                <label>Postleitzahl:</label>
-                <input
-                    type="text"
-                    v-model="form.pickupZip"
-                    class="w-full p-2 border rounded"
-                />
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Abholadresse:<span class="text-red-600 text-sm">*</span></label>
+                    <input
+                        type="text"
+                        v-model="form.pickupAddress"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                    />
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Postleitzahl:<span class="text-red-600 text-sm">*</span></label>
+                    <input
+                        type="text"
+                        v-model="form.pickupZip"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                    />
+                </div>
             </div>
-            <label>Art der Kleidung:</label>
-            <select
-                v-model="form.clothingType"
-                class="w-full p-2 border rounded mb-4"
-            >
-                <option value="">Wähle eine Option</option>
-                <option value="Winterkleidung">Winterkleidung</option>
-                <option value="Sommerkleidung">Sommerkleidung</option>
-                <option value="Schuhe">Schuhe</option>
-            </select>
-            <label>Krisengebiet:</label>
-            <select
-                v-model="form.crisisRegion"
-                class="w-full p-2 border rounded mb-4"
-            >
-                <option value="">Wähle eine Region</option>
-                <option value="Region A">Region A</option>
-                <option value="Region B">Region B</option>
-                <option value="Region C">Region C</option>
-            </select>
-            <button
-                type="submit"
-                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            >
-                Spende registrieren
-            </button>
+            <div class="mb-4">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Art der Kleidung:<span class="text-red-600 text-sm">*</span></label>
+                <select
+                    v-model="form.clothingType"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                >
+                    <option value="">Wähle eine Option</option>
+                    <option value="Winterkleidung">Winterkleidung</option>
+                    <option value="Sommerkleidung">Sommerkleidung</option>
+                    <option value="Schuhe">Schuhe</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Krisengebiet:<span class="text-red-600 text-sm">*</span></label>
+                <select
+                    v-model="form.crisisRegion"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                >
+                    <option value="">Wähle eine Region</option>
+                    <option value="Region A">Region A</option>
+                    <option value="Region B">Region B</option>
+                    <option value="Region C">Region C</option>
+                </select>
+            </div>
+            <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Spende registrieren</button>
         </form>
     </div>
 </template>
 <script setup>
 import { ref } from "vue";
 const form = ref({
-    deliveryOption: "",
+    deliveryOption: "office",
     pickupAddress: "",
     pickupZip: "",
     clothingType: "",
     crisisRegion: "",
 });
-const handleSubmit = () => {
-    alert(JSON.stringify(form.value, null, 2));
+const submitDonation = () => {
+    if (form.value.clothingType == "") {
+        alert("Bitte gib eine Art der Kleidung an!");
+    } else if (form.value.crisisRegion == "") {
+        alert("Bitte gib ein Krisengebiet an!");
+    } else if (form.value.deliveryOption == "pickup" && form.value.pickupAddress == "") {
+        alert("Bitte gib eine Abholadresse an!");
+    } else if (form.value.deliveryOption == "pickup" && form.value.pickupZip == "") {
+        alert("Bitte gib eine Postleitzahl an!");
+    } else {
+        alert(JSON.stringify(form.value, null, 2));
+    }
 };
 </script>
