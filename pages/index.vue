@@ -18,7 +18,6 @@
                 </div>
             </div>
         </div>
-
         <div v-if="success">
             <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="success">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0 inline w-5 h-5 me-3">
@@ -29,13 +28,14 @@
                     />
                 </svg>
 
-                <span class="sr-only">Erfolgreich registriert!</span>
+                <span class="sr-only">Danke für deine Spende!</span>
                 <div>
-                    <span class="font-medium">Vielen Dank für deine Kleiderspende! Du hast folgende Daten angegeben:</span>
-                    {{ success }}
-                    <!-- <ul class="mt-1.5 list-disc list-inside">
-                        <li v-for="(value, index) in form" :key="index">{{ value }}</li>
-                    </ul> -->
+                    <span class="font-medium">Danke für deine Spende! Hier sind die von dir angegebenen Daten:</span>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        <li v-for="(label, key) in visibleFormData" :key="key">
+                            <strong>{{ label }}:</strong> {{ form[key] }}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -130,10 +130,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const errors = ref([]);
-const success = ref("");
+const success = ref(false);
 
 // ZIP Office Stuttgart
 const officeZipCode = "70176";
@@ -171,6 +171,7 @@ const resetForm = () => {
         firstname: "",
         lastname: "",
         email: "",
+        phone: "",
         pickupAddress: "",
         pickupZip: "",
         pickupLocation: "",
@@ -179,9 +180,33 @@ const resetForm = () => {
     };
 };
 
+const formLabels = {
+    deliveryOption: "Übergabe",
+    firstname: "Vorname",
+    lastname: "Nachname",
+    email: "E-Mail",
+    phone: "Telefon",
+    pickupAddress: "Abholadresse",
+    pickupZip: "Postleitzahl",
+    pickupLocation: "Ort",
+    clothingType: "Kleidungsart",
+    crisisRegion: "Krisengebiet",
+};
+
+const visibleFormData = computed(() => {
+    return (
+        Object.keys(form.value)
+            // .filter((key) => form.value[key]) // Zeige nur ausgefüllte Felder an
+            .reduce((result, key) => {
+                result[key] = formLabels[key]; // Verwende das Label für den Schlüssel
+                return result;
+            }, {})
+    );
+});
+
 const submitDonation = () => {
     errors.value = [];
-    success.value = "";
+    success.value = false;
 
     // Validation for pickup
     if (form.value.deliveryOption === "pickup") {
@@ -217,9 +242,10 @@ const submitDonation = () => {
     }
 
     // Show errors or success message
-    if (errors.value.length == 0) {
+    if (errors.value.length === 0) {
         // Successfully submitted form
-        success.value = JSON.stringify(form.value, null, 2);
+        success.value = true;
+        console.log(form.value.firstname);
         resetForm();
     }
 };
