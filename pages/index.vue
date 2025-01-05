@@ -1,6 +1,24 @@
 <template>
     <div>
         <h2 class="text-2xl font-semibold mb-4">Registriere deine Kleiderspende</h2>
+
+        <div v-if="errors.length > 0">
+            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+                    />
+                </svg>
+                <span class="sr-only">Fehler</span>
+                <div>
+                    <span class="font-medium">Folgende Daten wurden nicht korrekt ausgefüllt:</span>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <form @submit.prevent="submitDonation" class="card">
             <div class="mb-4">
                 <label class="form-label">Wie möchtest Du deine Kleiderspende übergeben?</label>
@@ -93,6 +111,8 @@
 <script setup>
 import { ref } from "vue";
 
+const errors = ref([]);
+
 // ZIP Office Stuttgart
 const officeZipCode = "70176";
 
@@ -123,39 +143,39 @@ const form = ref({
 });
 
 const submitDonation = () => {
-    const errors = [];
+    errors.value = [];
 
     // Validation for pickup
     if (form.value.deliveryOption === "pickup") {
         if (!form.value.pickupAddress) {
-            errors.push("Bitte gib eine Straße / Nr. an!");
+            errors.value.push("Bitte gib eine Straße / Nr. an!");
         }
         if (!form.value.pickupZip) {
-            errors.push("Bitte gib eine gültige Postleitzahl an!");
+            errors.value.push("Bitte gib eine gültige Postleitzahl an!");
         }
         if (!form.value.pickupLocation) {
-            errors.push("Bitte gib einen Ort an!");
+            errors.value.push("Bitte gib einen Ort an!");
         }
         if (form.value.pickupZip && !isZipInRange(form.value.pickupZip)) {
-            errors.push("Die Abholadresse liegt nicht in der Nähe der Geschäftsstelle.");
+            errors.value.push("Die Abholadresse liegt nicht in der Nähe der Geschäftsstelle.");
         }
     }
 
     // General validations
     if (!form.value.firstname) {
-        errors.push("Bitte gib deinen Vornamen an!");
+        errors.value.push("Bitte gib deinen Vornamen an!");
     }
     if (!form.value.lastname) {
-        errors.push("Bitte gib deinen Nachnamen an!");
+        errors.value.push("Bitte gib deinen Nachnamen an!");
     }
     if (!form.value.email || !isValidEmail(form.value.email)) {
-        errors.push("Bitte gib deine E-Mail-Adresse an!");
+        errors.value.push("Bitte gib eine gültige E-Mail-Adresse an!");
     }
     if (!form.value.clothingType) {
-        errors.push("Bitte gib eine Art der Kleidung an!");
+        errors.value.push("Bitte gib eine Art der Kleidung an!");
     }
     if (!form.value.crisisRegion) {
-        errors.push("Bitte gib ein Krisengebiet an!");
+        errors.value.push("Bitte gib ein Krisengebiet an!");
     }
 
     // Show errors or success message
@@ -163,7 +183,7 @@ const submitDonation = () => {
         alert(errors.join("\n"));
     } else {
         // Successfully submitted form
-        alert("Spende erfolgreich registriert:\n" + JSON.stringify(form.value, null, 2));
+        // alert("Spende erfolgreich registriert:\n" + JSON.stringify(form.value, null, 2));
     }
 };
 </script>
