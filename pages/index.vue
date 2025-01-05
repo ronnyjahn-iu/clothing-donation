@@ -1,106 +1,59 @@
 <template>
     <div>
         <h2 class="text-2xl font-semibold mb-4">Registriere deine Kleiderspende</h2>
-        <form
-            @submit.prevent="submitDonation"
-            class="block p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
+        <form @submit.prevent="submitDonation" class="card">
             <div class="mb-4">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wie möchtest Du deine Kleiderspende übergeben?</label>
+                <label class="form-label">Wie möchtest Du deine Kleiderspende übergeben?</label>
                 <div>
                     <label class="inline-flex items-center">
-                        <input
-                            type="radio"
-                            class="mr-1.5 w-4 h-4 border-gray-300 focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 dark:focus:bg-indigo-600 dark:bg-gray-700 dark:border-gray-600"
-                            v-model="form.deliveryOption"
-                            value="office"
-                        />
+                        <input type="radio" class="form-radio" v-model="form.deliveryOption" value="office" />
                         Übergabe an der Geschäftsstelle
                     </label>
                     <label class="inline-flex items-center ml-4">
-                        <input
-                            type="radio"
-                            class="mr-1.5 w-4 h-4 border-gray-300 focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-600 dark:focus:bg-indigo-600 dark:bg-gray-700 dark:border-gray-600"
-                            v-model="form.deliveryOption"
-                            value="pickup"
-                        />
+                        <input type="radio" class="form-radio" v-model="form.deliveryOption" value="pickup" />
                         Abholung
                     </label>
                 </div>
             </div>
-
             <div class="flex gap-4 mb-4">
                 <div class="lg:w-1/2">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vorname:<span class="text-red-600 text-sm">*</span></label>
-                    <input
-                        type="text"
-                        v-model="form.firstname"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                    />
+                    <label class="form-label">Vorname:<span class="text-red-600 text-sm">*</span></label>
+                    <input type="text" v-model="form.firstname" class="form-input" />
                 </div>
                 <div class="lg:w-1/2">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nachname:<span class="text-red-600 text-sm">*</span></label>
-                    <input
-                        type="text"
-                        v-model="form.lastname"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                    />
+                    <label class="form-label">Nachname:<span class="text-red-600 text-sm">*</span></label>
+                    <input type="text" v-model="form.lastname" class="form-input" />
                 </div>
             </div>
-
             <div class="flex gap-4 mb-4">
                 <div class="lg:w-1/2">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Mail:<span class="text-red-600 text-sm">*</span></label>
-                    <input
-                        type="email"
-                        v-model="form.email"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                    />
+                    <label class="form-label">E-Mail:<span class="text-red-600 text-sm">*</span></label>
+                    <input type="email" v-model="form.email" class="form-input" />
                 </div>
                 <div class="lg:w-1/2">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefon:</label>
-                    <input
-                        type="text"
-                        v-model="form.phone"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                    />
+                    <label class="form-label">Telefon:</label>
+                    <input type="text" v-model="form.phone" class="form-input" />
                 </div>
             </div>
-
             <div v-if="form.deliveryOption === 'pickup'" class="mb-4">
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Straße / Nr.:<span class="text-red-600 text-sm">*</span></label>
-                    <input
-                        type="text"
-                        v-model="form.pickupAddress"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                    />
+                    <label class="form-label">Straße / Nr.:<span class="text-red-600 text-sm">*</span></label>
+                    <input type="text" v-model="form.pickupAddress" class="form-input" />
                 </div>
                 <div class="flex gap-4">
                     <div class="lg:w-1/3">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Postleitzahl:<span class="text-red-600 text-sm">*</span></label>
-                        <input
-                            type="text"
-                            v-model="form.pickupZip"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                        />
+                        <label class="form-label">Postleitzahl:<span class="text-red-600 text-sm">*</span></label>
+                        <input type="text" v-model="form.pickupZip" class="form-input" />
                     </div>
                     <div class="lg:w-2/3">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ort:<span class="text-red-600 text-sm">*</span></label>
-                        <input
-                            type="text"
-                            v-model="form.pickupLocation"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                        />
+                        <label class="form-label">Ort:<span class="text-red-600 text-sm">*</span></label>
+                        <input type="text" v-model="form.pickupLocation" class="form-input" />
                     </div>
                 </div>
             </div>
             <div class="mb-4">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Art der Kleidung:<span class="text-red-600 text-sm">*</span></label>
-                <select
-                    v-model="form.clothingType"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                >
+                <label class="form-label">Art der Kleidung:<span class="text-red-600 text-sm">*</span></label>
+                <select v-model="form.clothingType" class="form-input">
                     <option value="">Wähle eine Option</option>
                     <option value="Winterkleidung">Winterkleidung</option>
                     <option value="Sommerkleidung">Sommerkleidung</option>
@@ -114,11 +67,8 @@
                 </select>
             </div>
             <div class="mb-4">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Krisengebiet:<span class="text-red-600 text-sm">*</span></label>
-                <select
-                    v-model="form.crisisRegion"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                >
+                <label class="form-label">Krisengebiet:<span class="text-red-600 text-sm">*</span></label>
+                <select v-model="form.crisisRegion" class="form-input">
                     <option value="">Wähle eine Region</option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Deutschland (Obdachlosenhilfe)">Deutschland (Obdachlosenhilfe)</option>
@@ -131,10 +81,11 @@
                     <option value="Ukraine">Ukraine</option>
                 </select>
             </div>
-            <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Spende registrieren</button>
+            <button type="submit" class="btn">Spende registrieren</button>
         </form>
     </div>
 </template>
+
 <script setup>
 import { ref } from "vue";
 
