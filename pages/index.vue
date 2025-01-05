@@ -117,7 +117,7 @@ const errors = ref([]);
 const officeZipCode = "70176";
 
 const isZipInRange = (pickupZip) => {
-    if (!pickupZip || pickupZip.length !== 5 || isNaN(pickupZip)) {
+    if (!pickupZip) {
         return false;
     }
     // Compares the first two digits of the postal code.
@@ -150,13 +150,13 @@ const submitDonation = () => {
         if (!form.value.pickupAddress) {
             errors.value.push("Bitte gib eine Straße / Nr. an!");
         }
-        if (!form.value.pickupZip) {
+        if (!form.value.pickupZip || form.value.pickupZip.length !== 5 || isNaN(form.value.pickupZip)) {
             errors.value.push("Bitte gib eine gültige Postleitzahl an!");
         }
         if (!form.value.pickupLocation) {
             errors.value.push("Bitte gib einen Ort an!");
         }
-        if (form.value.pickupZip && !isZipInRange(form.value.pickupZip)) {
+        if (form.value.pickupZip && form.value.pickupZip.length === 5 && !isNaN(form.value.pickupZip) && !isZipInRange(form.value.pickupZip)) {
             errors.value.push("Die Abholadresse liegt nicht in der Nähe der Geschäftsstelle.");
         }
     }
