@@ -4,33 +4,37 @@
         <form @submit.prevent="submitDonation" class="card">
             <div class="mb-4">
                 <label class="form-label">Wie möchtest Du deine Kleiderspende übergeben?</label>
-                <div>
-                    <label class="inline-flex items-center">
-                        <input type="radio" class="form-radio" v-model="form.deliveryOption" value="office" />
-                        Übergabe an der Geschäftsstelle
-                    </label>
-                    <label class="inline-flex items-center ml-4">
-                        <input type="radio" class="form-radio" v-model="form.deliveryOption" value="pickup" />
-                        Abholung
-                    </label>
+                <div class="flex flex-col md:flex-row gap-2 md:gap-3">
+                    <div>
+                        <label class="inline-flex items-center">
+                            <input type="radio" class="form-radio" v-model="form.deliveryOption" value="office" />
+                            Übergabe an der Geschäftsstelle
+                        </label>
+                    </div>
+                    <div>
+                        <label class="inline-flex items-center md:ml-4">
+                            <input type="radio" class="form-radio" v-model="form.deliveryOption" value="pickup" />
+                            Abholung
+                        </label>
+                    </div>
                 </div>
             </div>
-            <div class="flex gap-4 mb-4">
-                <div class="lg:w-1/2">
+            <div class="flex flex-col md:flex-row gap-4 mb-4">
+                <div class="md:w-1/2">
                     <label class="form-label">Vorname:<span class="text-red-600 text-sm">*</span></label>
                     <input type="text" v-model="form.firstname" class="form-input" />
                 </div>
-                <div class="lg:w-1/2">
+                <div class="md:w-1/2">
                     <label class="form-label">Nachname:<span class="text-red-600 text-sm">*</span></label>
                     <input type="text" v-model="form.lastname" class="form-input" />
                 </div>
             </div>
-            <div class="flex gap-4 mb-4">
-                <div class="lg:w-1/2">
+            <div class="flex flex-col md:flex-row gap-4 mb-4">
+                <div class="md:w-1/2">
                     <label class="form-label">E-Mail:<span class="text-red-600 text-sm">*</span></label>
                     <input type="email" v-model="form.email" class="form-input" />
                 </div>
-                <div class="lg:w-1/2">
+                <div class="md:w-1/2">
                     <label class="form-label">Telefon:</label>
                     <input type="text" v-model="form.phone" class="form-input" />
                 </div>
@@ -40,12 +44,12 @@
                     <label class="form-label">Straße / Nr.:<span class="text-red-600 text-sm">*</span></label>
                     <input type="text" v-model="form.pickupAddress" class="form-input" />
                 </div>
-                <div class="flex gap-4">
-                    <div class="lg:w-1/3">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="md:w-1/3">
                         <label class="form-label">Postleitzahl:<span class="text-red-600 text-sm">*</span></label>
                         <input type="text" v-model="form.pickupZip" class="form-input" />
                     </div>
-                    <div class="lg:w-2/3">
+                    <div class="md:w-2/3">
                         <label class="form-label">Ort:<span class="text-red-600 text-sm">*</span></label>
                         <input type="text" v-model="form.pickupLocation" class="form-input" />
                     </div>
