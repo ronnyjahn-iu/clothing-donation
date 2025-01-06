@@ -32,27 +32,30 @@
                 <div>
                     <span class="font-medium">Danke für deine Spende! Hier sind die von dir angegebenen Daten:</span>
                     <ul class="mt-1.5 list-disc list-inside">
-                        <li v-for="(label, key) in visibleFormData" :key="key">
-                            <strong>{{ label }}:</strong> {{ form[key] }}
+                        <li v-for="(value, key) in submittedData" :key="key">
+                            <strong>{{ formLabels[key] || key }}:</strong> {{ value }}
                         </li>
                     </ul>
                 </div>
             </div>
+            <div>
+                <button @click="success = false" type="button" class="btn-outlined btn-green">Spende erneut registrieren</button>
+            </div>
         </div>
 
-        <form @submit.prevent="submitDonation" class="card">
+        <form @submit.prevent="submitDonation" v-if="!success" class="card">
             <div class="mb-4">
                 <label class="form-label">Wie möchtest Du deine Kleiderspende übergeben?</label>
                 <div class="flex flex-col md:flex-row gap-2 md:gap-3">
                     <div>
                         <label class="inline-flex items-center">
-                            <input type="radio" class="form-radio" v-model="form.deliveryOption" value="office" />
+                            <input type="radio" class="form-radio" v-model="form.deliveryOption" value="Übergabe an Geschäftsstelle" />
                             Übergabe an der Geschäftsstelle
                         </label>
                     </div>
                     <div>
                         <label class="inline-flex items-center md:ml-4">
-                            <input type="radio" class="form-radio" v-model="form.deliveryOption" value="pickup" />
+                            <input type="radio" class="form-radio" v-model="form.deliveryOption" value="Abholung" />
                             Abholung
                         </label>
                     </div>
@@ -78,7 +81,7 @@
                     <input type="text" v-model="form.phone" class="form-input" />
                 </div>
             </div>
-            <div v-if="form.deliveryOption === 'pickup'" class="mb-4">
+            <div v-if="form.deliveryOption === 'Abholung'" class="mb-4">
                 <div class="mb-4">
                     <label class="form-label">Straße / Nr.:<span class="text-red-600 text-sm">*</span></label>
                     <input type="text" v-model="form.pickupAddress" class="form-input" />
@@ -134,6 +137,7 @@ import { ref, computed } from "vue";
 
 const errors = ref([]);
 const success = ref(false);
+const submittedData = ref({});
 
 // ZIP Office Stuttgart
 const officeZipCode = "70176";
@@ -152,7 +156,7 @@ const isValidEmail = (email) => {
 };
 
 const form = ref({
-    deliveryOption: "office",
+    deliveryOption: "Übergabe an Geschäftsstelle",
     firstname: "",
     lastname: "",
     email: "",
@@ -164,10 +168,14 @@ const form = ref({
     crisisRegion: "",
 });
 
+const getFilledFormData = () => {
+    return Object.fromEntries(Object.entries(form.value).filter(([key, value]) => value !== ""));
+};
+
 // Reset form values
 const resetForm = () => {
     form.value = {
-        deliveryOption: "office",
+        deliveryOption: "Übergabe an Geschäftsstelle",
         firstname: "",
         lastname: "",
         email: "",
@@ -193,23 +201,12 @@ const formLabels = {
     crisisRegion: "Krisengebiet",
 };
 
-const visibleFormData = computed(() => {
-    return (
-        Object.keys(form.value)
-            // .filter((key) => form.value[key]) // Zeige nur ausgefüllte Felder an
-            .reduce((result, key) => {
-                result[key] = formLabels[key]; // Verwende das Label für den Schlüssel
-                return result;
-            }, {})
-    );
-});
-
 const submitDonation = () => {
     errors.value = [];
     success.value = false;
 
     // Validation for pickup
-    if (form.value.deliveryOption === "pickup") {
+    if (form.value.deliveryOption === "Abholung") {
         if (!form.value.pickupAddress) {
             errors.value.push("Bitte gib eine Straße / Nr. an!");
         }
@@ -241,11 +238,14 @@ const submitDonation = () => {
         errors.value.push("Bitte gib ein Krisengebiet an!");
     }
 
-    // Show errors or success message
     if (errors.value.length === 0) {
         // Successfully submitted form
         success.value = true;
-        console.log(form.value.firstname);
+
+        // Push submitted data into submittedData ref to save it before resting the fields
+        submittedData.value = { ...getFilledFormData() };
+
+        // Reset form fields
         resetForm();
     }
 };
