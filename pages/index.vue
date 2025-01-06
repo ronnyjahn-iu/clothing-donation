@@ -2,7 +2,7 @@
     <div>
         <h2 class="text-2xl font-semibold mb-4">Registriere deine Kleiderspende</h2>
 
-        <div v-if="errors.length > 0">
+        <div v-show="errors.length > 0" id="error-messages">
             <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                 <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -133,7 +133,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, nextTick } from "vue";
 
 const errors = ref([]);
 const success = ref(false);
@@ -238,7 +238,20 @@ const submitDonation = () => {
         errors.value.push("Bitte gib ein Krisengebiet an!");
     }
 
-    if (errors.value.length === 0) {
+    if (errors.value.length > 0) {
+        const errorElement = document.getElementById("error-messages");
+        nextTick(() => {
+            if (errorElement) {
+                const elementPosition = errorElement.getBoundingClientRect().top + window.scrollY;
+
+                const offsetPosition = elementPosition - 60;
+                console.log(offsetPosition);
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+            } else {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+    } else {
         // Successfully submitted form
         success.value = true;
 
