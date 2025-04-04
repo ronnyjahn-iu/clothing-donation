@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="text-2xl font-semibold mb-4">Registriere deine Kleiderspende</h2>
+        <h2 class="text-3xl font-semibold my-12 text-center">Registriere deine Kleiderspende</h2>
 
         <div v-show="errors.length > 0" id="error-messages">
             <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
