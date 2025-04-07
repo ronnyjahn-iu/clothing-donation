@@ -18,6 +18,14 @@ h2{
     @apply text-2xl;
 }
 
+h3{
+    @apply text-xl;
+}
+
+h4{
+    @apply text-lg;
+}
+
 p, ul,ol{
     @apply text-lg mb-5 last:mb-0;
 }
@@ -35,11 +43,11 @@ p, ul,ol{
 }
 
 .btn {
-    @apply bg-primary transition-all duration-300 ease-in-out cursor-pointer text-white px-4 py-2 rounded hover:bg-darkgray;
+    @apply bg-primary transition-all duration-300 ease-in-out cursor-pointer text-white px-5 py-2.5 rounded hover:bg-darkgray;
 }
 
 .btn-outlined {
-    @apply border focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:hover:text-white;
+    @apply transition-all duration-300 ease-in-out border focus:ring-4 focus:outline-none font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:hover:text-white;
     &.btn-green {
         @apply text-green-700 hover:text-white border-green-700 hover:bg-green-800 focus:ring-green-200 dark:border-green-500 dark:text-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800;
     }
@@ -47,8 +55,11 @@ p, ul,ol{
 
 header {
     nav {
+        a{
+            @apply underline underline-offset-5 decoration-4 decoration-transparent hover:decoration-primary/20;
+        }
         .active {
-            @apply underline underline-offset-4 decoration-4 decoration-primary;
+            @apply decoration-primary hover:decoration-primary;
         }
     }
 }

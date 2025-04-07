@@ -18,6 +18,6 @@ const route = useRoute()
                 </ul>
             </nav>
         </div>
-        <img src="/images/headerpic.jpeg" alt="Kleiderspende" class="h-[370px] w-full object-cover" />
+        <img src="/images/headerpic.jpeg" alt="Kleiderspende" class="h-[200px] lg:h-[370px] w-full object-cover" />
     </header>
 </template>

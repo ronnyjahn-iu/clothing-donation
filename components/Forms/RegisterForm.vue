@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-show="errors.length > 0" id="error-messages">
-            <div class="flex p-4 mb-4 text-sm text-red-800 border border-red-100 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <div class="flex p-4 mb-4 text-red-800 border border-red-100 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                 <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
@@ -17,8 +17,8 @@
             </div>
         </div>
         <div v-if="success">
-            <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="success">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0 inline w-5 h-5 me-3">
+            <div class="flex p-4 mb-4 text-green-800 border shadow-md shadow-green-800/5 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="success">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0 inline w-7 h-7 me-3">
                     <path
                         fill-rule="evenodd"
                         d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
@@ -26,10 +26,10 @@
                     />
                 </svg>
 
-                <span class="sr-only">Danke für deine Spende!</span>
+                <h3 class="sr-only">Danke für deine Spende! Hier sind die von dir angegebenen Daten:</h3>
                 <div>
-                    <span class="font-medium">Danke für deine Spende! Hier sind die von dir angegebenen Daten:</span>
-                    <ul class="mt-1.5 list-disc list-inside">
+                    <h3 class="mb-3">Danke für deine Spende! Hier sind die von dir angegebenen Daten:</h3>
+                    <ul class="mt-1.5 list-disc list-inside text-sm">
                         <li v-for="(value, key) in submittedData" :key="key">
                             <strong>{{ formLabels[key] || key }}:</strong> {{ value }}
                         </li>

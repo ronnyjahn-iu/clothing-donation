@@ -16,6 +16,9 @@ module.exports = {
             darkgray: '#54494b',
             primary: '#dd7279',
           },
+          textUnderlineOffset: {
+          5: '6px' 
+        }
       },
     },
     plugins: [forms],
