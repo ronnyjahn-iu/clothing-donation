@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-    @apply text-darkgray bg-lightbrown;
+    @apply text-darkgray bg-lightbrown text-[17px];
 }
 
 h1,h2,h3,h4{
@@ -24,10 +24,6 @@ h3{
 
 h4{
     @apply text-lg;
-}
-
-p, ul,ol{
-    @apply text-lg mb-5 last:mb-0;
 }
 
 .form-label {
@@ -61,6 +57,32 @@ header {
         .active {
             @apply decoration-primary hover:decoration-primary;
         }
+    }
+}
+
+main{
+    a{
+        @apply underline underline-offset-4 decoration-2 decoration-primary hover:no-underline;
+    }
+
+    p, ul,ol{
+        @apply mb-4 last:mb-0;
+    }
+    
+    ul,ol{
+        @apply pl-4;
+    
+        li{
+            @apply mb-2 last:mb-0;
+        }
+    }
+    
+    ul{
+        @apply list-disc;
+    }
+    
+    ol{
+        @apply list-decimal;
     }
 }
 
