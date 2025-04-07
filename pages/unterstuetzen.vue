@@ -1,5 +1,5 @@
 <template>
     <div>
-        <h2>Unterstützen</h2>
+        <h1>Unterstützen</h1>
     </div>
 </template>
