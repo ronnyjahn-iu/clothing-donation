@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const forms = require('@tailwindcss/forms')
+const forms = require('@tailwindcss/forms');
 module.exports = {
     content: [
       "./components/**/*.{js,vue,ts}",
