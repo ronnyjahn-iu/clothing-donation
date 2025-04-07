@@ -1,9 +1,6 @@
-@import "tailwindcss";
-@theme {
-    --color-lightbrown: #fffaf3;
-    --color-darkgray: #54494b;
-    --color-red: #dd7279;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html {
     @apply text-darkgray bg-lightbrown;
@@ -14,21 +11,29 @@ html {
 }
 
 .form-input {
-    @apply bg-gray-50 border border-gray-300 text-darkgray text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500;
+    @apply bg-gray-50 border border-gray-300 text-darkgray text-sm rounded-lg focus-visible:outline-0 focus:ring-1 focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary;
 }
 
 .form-radio {
-    @apply mr-1.5 w-4 h-4 border-gray-300 focus:ring-2 focus:ring-indigo-300 dark:focus:ring-red dark:focus:bg-red dark:bg-gray-700 dark:border-gray-600;
+    @apply relative mr-1 size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-primary checked:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-gray-700 dark:bg-gray-950;
 }
 
 .btn {
-    @apply bg-red text-white px-4 py-2 rounded hover:bg-indigo-700;
+    @apply bg-primary transition-all duration-300 ease-in-out cursor-pointer text-white px-4 py-2 rounded hover:bg-darkgray;
 }
 
 .btn-outlined {
     @apply border focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:hover:text-white;
     &.btn-green {
         @apply text-green-700 hover:text-white border-green-700 hover:bg-green-800 focus:ring-green-200 dark:border-green-500 dark:text-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800;
+    }
+}
+
+header {
+    nav {
+        .active {
+            @apply underline underline-offset-4 decoration-4 decoration-primary;
+        }
     }
 }
 

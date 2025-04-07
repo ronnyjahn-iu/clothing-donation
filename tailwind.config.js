@@ -1,8 +1,22 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-    content: ["./components/**/*.{vue,js}", "./layouts/**/*.vue", "./pages/**/*.vue", "./node_modules/flowbite/**/*.js"],
+const forms = require('@tailwindcss/forms')
+module.exports = {
+    content: [
+      "./components/**/*.{js,vue,ts}",
+      "./layouts/**/*.vue",
+      "./pages/**/*.vue",
+      "./plugins/**/*.{js,ts}",
+      "./app.vue",
+      "./error.vue",
+    ],
     theme: {
-        extend: {},
+      extend: {
+        colors: {
+            lightbrown: '#fffaf3',
+            darkgray: '#54494b',
+            primary: '#dd7279',
+          },
+      },
     },
-    plugins: [require("@tailwindcss/forms"), require("flowbite/plugin")],
-};
+    plugins: [forms],
+  }

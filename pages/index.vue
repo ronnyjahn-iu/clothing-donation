@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h2 class="text-3xl font-semibold my-12 text-center">Registriere deine Kleiderspende</h2>
+        <h2 class="text-3xl font-semibold mt-8 mb-12 text-center">Registriere deine Kleiderspende</h2>
 
         <div v-show="errors.length > 0" id="error-messages">
-            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <div class="flex p-4 mb-4 text-sm text-red-800 border border-red-100 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                 <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
@@ -49,13 +49,13 @@
                 <div class="flex flex-col md:flex-row gap-2 md:gap-3">
                     <div>
                         <label class="inline-flex items-center">
-                            <input type="radio" class="form-radio" v-model="form.deliveryOption" value="Übergabe an Geschäftsstelle" />
+                            <input type="radio" class="form-radio text-green-600" v-model="form.deliveryOption" value="Übergabe an Geschäftsstelle" />
                             Übergabe an der Geschäftsstelle
                         </label>
                     </div>
                     <div>
                         <label class="inline-flex items-center md:ml-4">
-                            <input type="radio" class="form-radio" v-model="form.deliveryOption" value="Abholung" />
+                            <input type="radio" class="form-radio text-red" v-model="form.deliveryOption" value="Abholung" />
                             Abholung
                         </label>
                     </div>
