@@ -2,8 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* poppins-regular - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/poppins-v22-latin-regular.woff2') format('woff2');
+}
+  
+/* poppins-700 - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/poppins-v22-latin-700.woff2') format('woff2');
+}
+
+/* satisfy-regular - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Satisfy';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/satisfy-v21-latin-regular.woff2') format('woff2');
+  }
+
 html {
-    @apply text-darkgray bg-lightbrown text-[17px];
+    @apply text-darkgray bg-lightbrown text-[16px] tracking-wide;
+    font-family: 'Poppins', sans-serif;
 }
 
 h1,h2,h3,h4{
@@ -11,7 +39,8 @@ h1,h2,h3,h4{
 }
 
 h1{
-    @apply text-4xl;
+    @apply text-4xl xl:text-5xl font-normal leading-10 xl:leading-[3.25rem] mb-8;
+    font-family: 'Satisfy', 'Poppins', sans-serif;
 }
 
 h2{
@@ -82,14 +111,14 @@ main{
     }
 
     p, ul,ol{
-        @apply mb-4 last:mb-0;
+        @apply text-[17px] leading-7 mb-4 last:mb-0;
     }
     
     ul,ol{
         @apply pl-4;
     
         li{
-            @apply mb-2 last:mb-0;
+            @apply mb-1 last:mb-0;
         }
     }
     
