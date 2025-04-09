@@ -36,7 +36,7 @@
                     </ul>
                 </div>
             </div>
-            <div>
+            <div class="mx-auto text-center">
                 <button @click="success = false" type="button" class="btn-outlined btn-green">Spende erneut registrieren</button>
             </div>
         </div>

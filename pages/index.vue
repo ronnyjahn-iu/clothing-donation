@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import RegisterForm from '~/components/Forms/RegisterForm.vue'
+import RegisterForm from '~/components/RegisterForm.vue'
 
 export default {
   components: {

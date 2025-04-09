@@ -18,7 +18,7 @@
             </span>
         </button>
     </div>
-    <img src="/images/headerpic.jpeg" alt="Kleiderspende" class="h-[200px] lg:h-[370px] w-full object-cover border-b-[5px] border-primary" />
+    <Headerpic />
 </header>
 </template>
 
