@@ -10,6 +10,9 @@
                 <li>
                     <NuxtLink to="/impressum">Impressum</NuxtLink>
                 </li>
+                <li>
+                    <NuxtLink to="/bildquellen">Bildquellen</NuxtLink>
+                </li>
             </ul>
         </nav>
     </div>
