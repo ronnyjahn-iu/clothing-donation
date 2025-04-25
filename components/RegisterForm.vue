@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="register">
         <div v-show="errors.length > 0" id="error-messages">
             <div class="flex p-4 mb-4 text-red-800 border border-red-100 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                 <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
