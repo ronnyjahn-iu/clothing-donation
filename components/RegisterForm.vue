@@ -1,21 +1,5 @@
 <template>
     <div id="register">
-        <div v-show="errors.length > 0" id="error-messages">
-            <div class="flex p-4 mb-4 text-red-800 border border-red-100 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
-                    />
-                </svg>
-                <span class="sr-only">Fehler</span>
-                <div>
-                    <span class="font-medium">Folgende Daten wurden nicht korrekt ausgefüllt:</span>
-                    <ul class="mt-1.5 list-disc list-inside text-sm">
-                        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div v-if="success">
             <div class="flex p-4 mb-4 text-green-800 border shadow-md shadow-green-800/5 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="success">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0 inline w-7 h-7 me-3">
@@ -42,62 +26,100 @@
         </div>
 
         <form @submit.prevent="submitDonation" v-if="!success" class="card">
+            <!-- Übergabeoption -->
             <div class="mb-4">
                 <label class="form-label">Wie möchtest Du deine Kleiderspende übergeben?</label>
                 <div class="flex flex-col md:flex-row gap-2 md:gap-3">
                     <div>
-                        <label class="inline-flex items-center">
-                            <input type="radio" class="form-radio text-primary" v-model="form.deliveryOption" value="Übergabe an Geschäftsstelle" />
+                        <label class="inline-flex items-center" for="deliveryOption1">
+                            <input
+                                type="radio"
+                                id="deliveryOption1"
+                                name="deliveryOption"
+                                class="form-radio text-primary"
+                                v-model="form.deliveryOption"
+                                value="Übergabe an Geschäftsstelle"
+                            />
                             Übergabe an der Geschäftsstelle
                         </label>
                     </div>
                     <div>
-                        <label class="inline-flex items-center md:ml-4">
-                            <input type="radio" class="form-radio text-primary" v-model="form.deliveryOption" value="Abholung" />
+                        <label class="inline-flex items-center md:ml-4" for="deliveryOption2">
+                            <input
+                                type="radio"
+                                id="deliveryOption2"
+                                name="deliveryOption"
+                                class="form-radio text-primary"
+                                v-model="form.deliveryOption"
+                                value="Abholung"
+                            />
                             Abholung
                         </label>
                     </div>
                 </div>
             </div>
+
+            <!-- Vorname und Nachname -->
             <div class="flex flex-col md:flex-row gap-4 mb-4">
                 <div class="md:w-1/2">
-                    <label class="form-label">Vorname:<span class="text-red-600 text-sm">*</span></label>
-                    <input type="text" v-model="form.firstname" class="form-input" />
+                    <label class="form-label" for="firstname">Vorname:<span class="text-red-600 text-sm">*</span></label>
+                    <input type="text" id="firstname" v-model="form.firstname" class="form-input" aria-describedby="error-firstname" />
+                    <span id="error-firstname" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib deinen Vornamen an!')">Bitte gib deinen Vornamen an!</span>
                 </div>
                 <div class="md:w-1/2">
-                    <label class="form-label">Nachname:<span class="text-red-600 text-sm">*</span></label>
-                    <input type="text" v-model="form.lastname" class="form-input" />
+                    <label class="form-label" for="lastname">Nachname:<span class="text-red-600 text-sm">*</span></label>
+                    <input type="text" id="lastname" v-model="form.lastname" class="form-input" aria-describedby="error-lastname" />
+                    <span id="error-lastname" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib deinen Nachnamen an!')">Bitte gib deinen Nachnamen an!</span>
                 </div>
             </div>
+
+            <!-- E-Mail und Telefon -->
             <div class="flex flex-col md:flex-row gap-4 mb-4">
                 <div class="md:w-1/2">
-                    <label class="form-label">E-Mail:<span class="text-red-600 text-sm">*</span></label>
-                    <input type="email" v-model="form.email" class="form-input" />
+                    <label class="form-label" for="email">E-Mail:<span class="text-red-600 text-sm">*</span></label>
+                    <input type="email" id="email" v-model="form.email" class="form-input" aria-describedby="error-email" />
+                    <span id="error-email" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib eine gültige E-Mail-Adresse an!')"
+                        >Bitte gib eine gültige E-Mail-Adresse an!</span
+                    >
                 </div>
                 <div class="md:w-1/2">
-                    <label class="form-label">Telefon:</label>
-                    <input type="text" v-model="form.phone" class="form-input" />
+                    <label class="form-label" for="phone">Telefon:</label>
+                    <input type="text" id="phone" v-model="form.phone" class="form-input" aria-describedby="error-phone" />
+                    <span id="error-phone" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib eine gültige Telefonnummer an!')"
+                        >Bitte gib eine gültige Telefonnummer an!</span
+                    >
                 </div>
             </div>
+
+            <!-- Abholadresse -->
             <div v-if="form.deliveryOption === 'Abholung'" class="mb-4">
                 <div class="mb-4">
-                    <label class="form-label">Straße / Nr.:<span class="text-red-600 text-sm">*</span></label>
-                    <input type="text" v-model="form.pickupAddress" class="form-input" />
+                    <label class="form-label" for="pickupAddress">Straße / Nr.:<span class="text-red-600 text-sm">*</span></label>
+                    <input type="text" id="pickupAddress" v-model="form.pickupAddress" class="form-input" aria-describedby="error-pickupAddress" />
+                    <span id="error-pickupAddress" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib eine Straße / Nr. an!')"
+                        >Bitte gib eine Straße / Nr. an!</span
+                    >
                 </div>
                 <div class="flex flex-col md:flex-row gap-4">
                     <div class="md:w-1/3">
-                        <label class="form-label">Postleitzahl:<span class="text-red-600 text-sm">*</span></label>
-                        <input type="text" v-model="form.pickupZip" class="form-input" />
+                        <label class="form-label" for="pickupZip">Postleitzahl:<span class="text-red-600 text-sm">*</span></label>
+                        <input type="text" id="pickupZip" v-model="form.pickupZip" class="form-input" aria-describedby="error-pickupZip" />
+                        <span id="error-pickupZip" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib eine gültige Postleitzahl an!')"
+                            >Bitte gib eine gültige Postleitzahl an!</span
+                        >
                     </div>
                     <div class="md:w-2/3">
-                        <label class="form-label">Ort:<span class="text-red-600 text-sm">*</span></label>
-                        <input type="text" v-model="form.pickupLocation" class="form-input" />
+                        <label class="form-label" for="pickupLocation">Ort:<span class="text-red-600 text-sm">*</span></label>
+                        <input type="text" id="pickupLocation" v-model="form.pickupLocation" class="form-input" aria-describedby="error-pickupLocation" />
+                        <span id="error-pickupLocation" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib einen Ort an!')">Bitte gib einen Ort an!</span>
                     </div>
                 </div>
             </div>
+
+            <!-- Kleidungstyp und Krisengebiet -->
             <div class="mb-4">
-                <label class="form-label">Art der Kleidung:<span class="text-red-600 text-sm">*</span></label>
-                <select v-model="form.clothingType" class="form-input">
+                <label class="form-label" for="clothingType">Art der Kleidung:<span class="text-red-600 text-sm">*</span></label>
+                <select id="clothingType" v-model="form.clothingType" class="form-input" aria-describedby="error-clothingType">
                     <option value="">Wähle eine Option</option>
                     <option value="Winterkleidung">Winterkleidung</option>
                     <option value="Sommerkleidung">Sommerkleidung</option>
@@ -109,10 +131,13 @@
                     <option value="Bettwäsche">Bettwäsche</option>
                     <option value="Jacken">Jacken</option>
                 </select>
+                <span id="error-clothingType" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib eine Art der Kleidung an!')"
+                    >Bitte gib eine Art der Kleidung an!</span
+                >
             </div>
             <div class="mb-4">
-                <label class="form-label">Krisengebiet:<span class="text-red-600 text-sm">*</span></label>
-                <select v-model="form.crisisRegion" class="form-input">
+                <label class="form-label" for="crisisRegion">Krisengebiet:<span class="text-red-600 text-sm">*</span></label>
+                <select id="crisisRegion" v-model="form.crisisRegion" class="form-input" aria-describedby="error-crisisRegion">
                     <option value="">Wähle eine Region</option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Deutschland (Obdachlosenhilfe)">Deutschland (Obdachlosenhilfe)</option>
@@ -124,7 +149,10 @@
                     <option value="Türkei und Syrien (Erdbebenhilfe)">Türkei und Syrien (Erdbebenhilfe)</option>
                     <option value="Ukraine">Ukraine</option>
                 </select>
+                <span id="error-crisisRegion" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib ein Krisengebiet an!')">Bitte gib ein Krisengebiet an!</span>
             </div>
+
+            <!-- Submit Button -->
             <button type="submit" class="btn">Spende registrieren</button>
         </form>
     </div>
