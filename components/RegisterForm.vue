@@ -25,7 +25,6 @@
         </div>
 
         <form @submit.prevent="submitDonation" id="registerForm" v-if="!success" class="card">
-            <!-- Übergabeoption -->
             <div class="mb-4">
                 <label class="form-label">Wie möchtest Du deine Kleiderspende übergeben?</label>
                 <div class="flex flex-col md:flex-row gap-2 md:gap-3">
@@ -57,8 +56,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Vorname und Nachname -->
             <div class="flex flex-col md:flex-row gap-4 mb-4">
                 <div class="md:w-1/2">
                     <label class="form-label" for="firstname">Vorname:<span class="text-red-600 text-sm">*</span></label>
@@ -71,8 +68,6 @@
                     <span id="error-lastname" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib deinen Nachnamen an!')">Bitte gib deinen Nachnamen an!</span>
                 </div>
             </div>
-
-            <!-- E-Mail und Telefon -->
             <div class="flex flex-col md:flex-row gap-4 mb-4">
                 <div class="md:w-1/2">
                     <label class="form-label" for="email">E-Mail:<span class="text-red-600 text-sm">*</span></label>
@@ -89,8 +84,6 @@
                     >
                 </div>
             </div>
-
-            <!-- Abholadresse -->
             <div v-if="form.deliveryOption === 'Abholung'" class="mb-4">
                 <div class="mb-4">
                     <label class="form-label" for="pickupAddress">Straße / Nr.:<span class="text-red-600 text-sm">*</span></label>
@@ -114,8 +107,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Kleidungstyp und Krisengebiet -->
             <div class="mb-4">
                 <label class="form-label" for="clothingType">Art der Kleidung:<span class="text-red-600 text-sm">*</span></label>
                 <select id="clothingType" v-model="form.clothingType" class="form-input" aria-describedby="error-clothingType">
@@ -150,8 +141,6 @@
                 </select>
                 <span id="error-crisisRegion" class="text-red-600 text-sm" v-if="errors.includes('Bitte gib ein Krisengebiet an!')">Bitte gib ein Krisengebiet an!</span>
             </div>
-
-            <!-- Submit Button -->
             <button type="submit" class="btn">Spende registrieren</button>
         </form>
     </div>
