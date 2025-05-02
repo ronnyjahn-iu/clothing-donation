@@ -10,7 +10,6 @@
                     />
                 </svg>
 
-                <h3 class="sr-only">Danke für deine Spende! Hier sind die von dir angegebenen Daten:</h3>
                 <div>
                     <h3 class="mb-3">Danke für deine Spende! Hier sind die von dir angegebenen Daten:</h3>
                     <ul class="mt-1.5 list-disc list-inside text-sm">
@@ -25,7 +24,7 @@
             </div>
         </div>
 
-        <form @submit.prevent="submitDonation" v-if="!success" class="card">
+        <form @submit.prevent="submitDonation" id="registerForm" v-if="!success" class="card">
             <!-- Übergabeoption -->
             <div class="mb-4">
                 <label class="form-label">Wie möchtest Du deine Kleiderspende übergeben?</label>
@@ -265,13 +264,12 @@ const submitDonation = () => {
     }
 
     if (errors.value.length > 0) {
-        const errorElement = document.getElementById("error-messages");
+        const registerForm = document.getElementById("registerForm");
         nextTick(() => {
-            if (errorElement) {
-                const elementPosition = errorElement.getBoundingClientRect().top + window.scrollY;
+            if (registerForm) {
+                const elementPosition = registerForm.getBoundingClientRect().top + window.scrollY;
 
-                const offsetPosition = elementPosition - 60;
-                console.log(offsetPosition);
+                const offsetPosition = elementPosition - 100;
                 window.scrollTo({ top: offsetPosition, behavior: "smooth" });
             } else {
                 window.scrollTo({ top: 0, behavior: "smooth" });

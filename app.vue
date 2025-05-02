@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <!-- Barrierefreiheit sicherstellen -->
-    <NuxtRouteAnnouncer />
-    <!-- Dein App-Inhalt -->
-    <NuxtLayout />
-  </div>
+    <div>
+        <NuxtRouteAnnouncer />
+        <NuxtLayout />
+    </div>
 </template>

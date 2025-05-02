@@ -13,15 +13,16 @@
             <NuxtLink to="/kontakt" :class="route.path === '/kontakt' ? 'active' : ''">Kontakt</NuxtLink>
         </li>
         <li>
-            <NuxtLink :to="(route.path !== '/' ? '/' : '') + '#register'" class="btn">Jetzt spenden</NuxtLink>
+            <NuxtLink @click.prevent="navigateToRegisterForm" class="btn">Jetzt spenden</NuxtLink>
         </li>
     </ul>
 </template>
 
 <script setup>
-import { onMounted, watch, nextTick } from "vue";
-import { useRoute } from "vue-router";
+import { nextTick } from "vue";
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
+const router = useRouter();
 const props = defineProps({
     classes: {
         type: String,
@@ -29,29 +30,19 @@ const props = defineProps({
     },
 });
 
-const scrollToAnchor = () => {
-    if (window.location.hash === "#register") {
+const navigateToRegisterForm = () => {
+    router.push({ path: "/" }).then(() => {
         nextTick(() => {
             const element = document.querySelector("#register");
-
             if (element) {
-                // alert("test");
-                element.scrollIntoView({ behavior: "smooth", block: "start" });
+                const elementPosition = registerForm.getBoundingClientRect().top + window.scrollY;
+                const offsetPosition = elementPosition - 100;
+
+                setTimeout(function () {
+                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                }, 100);
             }
         });
-    }
+    });
 };
-
-// Initialer Check, falls die Seite mit einem Hash-Fragment geladen wird
-onMounted(() => {
-    scrollToAnchor();
-});
-
-// Watcher für Routeänderungen
-watch(
-    () => route.fullPath,
-    () => {
-        scrollToAnchor();
-    }
-);
 </script>
